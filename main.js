@@ -6,8 +6,29 @@
 // BONUS: generare la griglia in jQuery utilizzando handlebars :wink:
 
 
+
+
+
+// BONUS: genero la griglia in jQuery utilizzando handlebars
+var template_html = $('#template-handlebars').html();
+var template = Handlebars.compile(template_html);
+
+var data = {
+    testo1 : 'container',
+    testo2 : 'square',
+};
+
+var html = template(data);
+$('body').append(html);
+
+do {
+    $('#box').append('<div class="square"></div>');
+} while ($('.square').length < 36);
+
+
 // Ad ogni click su un quadratino, parte una richiesta ajax per recuperare un numero random tra 1 e 9.
 $('.square').click(function() {
+    // creo una variabile PRIMA dell'ajax in modo da poterla richiamare dentro l'ajax stesso
     var questo = $(this);
     $.ajax({
         'url':'https://flynn.boolean.careers/exercises/api/random/int',
@@ -16,6 +37,7 @@ $('.square').click(function() {
             // recupero il numero restituito dall'api
             var numero_ajax = data.response;
             console.log(numero_ajax);
+            // richiamo la funzione che mi permette sia di assegnare la classe giusta al quadrato selezionato, sia di mettergli dentro il numero recuperato dall'API
             colori(numero_ajax, questo);
         },
         'error': function() {
@@ -25,29 +47,12 @@ $('.square').click(function() {
 
 });
 
-
+// funzione che mi permette sia di assegnare la classe giusta al quadrato selezionato, sia di mettergli dentro il numero recuperato dall'API
 function colori(numero, quadrato) {
-
+    // Se il numero restituito dall'api è <= 5, il quadrato su cui l'utente ha cliccato diventa giallo; se invece il numero restituito dall'api è > 5, il quadrato su cui l'utente ha cliccato diventa verde.
     if (numero > 5) {
-        quadrato.text(numero).addClass('green')
+        quadrato.text(numero).addClass('green');
     } else {
-        quadrato.text(numero).removeClass('green').addClass('yellow')
+        quadrato.text(numero).removeClass('green').addClass('yellow');
     }
 }
-
-
-// // genero la griglia con jQuery, aggiungendo le classi al div con ID Box
-// do {
-//     $('#box').append('<div class="square"></div>');
-// } while ($('.square').length < 36);
-// //
-// // console.log(numeri_quadrati);
-
-
-
-// ad ogni classe "square" cho ho generato sopra con JQuery vado ad aggiungergli del testo con un numero generato grazie alla funzione "genera_random"; inoltre gli aggiungo la classe giusta con la funzione "colori", assegnadogli quindi o quella "red"(numero pari), o quella "black"(numero dispari), o quella "green"(numero 0).
-// $('.square').each(function(){
-//     var numeri_casuali = genera_random(0, 10);
-//     var classe = colori(numeri_casuali);
-//     $(this).text(numeri_casuali).addClass(classe);
-// });

@@ -20,7 +20,7 @@
 .square {
     width: 100px;
     height: 100px;
-    border: 1px solid blue;
+    border: 1px solid #05668d;
     float: left;
     text-align: center;
     padding-top: 40px;
