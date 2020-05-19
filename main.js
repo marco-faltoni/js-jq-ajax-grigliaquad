@@ -8,6 +8,7 @@
 
 // Ad ogni click su un quadratino, parte una richiesta ajax per recuperare un numero random tra 1 e 9.
 $('.square').click(function() {
+    var questo = $(this);
     $.ajax({
         'url':'https://flynn.boolean.careers/exercises/api/random/int',
         'method': 'GET',
@@ -15,7 +16,7 @@ $('.square').click(function() {
             // recupero il numero restituito dall'api
             var numero_ajax = data.response;
             console.log(numero_ajax);
-            colori(numero_ajax);
+            colori(numero_ajax, questo);
         },
         'error': function() {
             alert('si è verificato un errore');
@@ -25,12 +26,12 @@ $('.square').click(function() {
 });
 
 
-function colori(numero) {
-    var classe;
+function colori(numero, quadrato) {
+
     if (numero > 5) {
-        $('.square').text(numero).addClass('green')
+        quadrato.text(numero).addClass('green')
     } else {
-        $('.square').text(numero).removeClass('green').addClass('yellow')
+        quadrato.text(numero).removeClass('green').addClass('yellow')
     }
 }
 
