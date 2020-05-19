@@ -31,9 +31,8 @@ function colori(numero) {
     if (numero > 5) {
         $('.square').text(numero).addClass('green')
     } else {
-        $('.square').text(numero).addClass('yellow')
+        $('.square').text(numero).removeClass('green').addClass('yellow')
     }
-    return classe;
 }
 
 
