@@ -16,6 +16,7 @@ $('.square').click(function() {
             var numero_ajax = data.response;
             console.log(numero_ajax);
             colori(numero_ajax);
+            $('.square').text(numero_ajax);
         },
         'error': function() {
             alert('si è verificato un errore');
@@ -28,9 +29,9 @@ $('.square').click(function() {
 function colori(numero) {
     var classe;
     if (numero > 5) {
-        classe = 'green';
+        $('.square').text(numero).addClass('green')
     } else {
-        classe = 'yellow';
+        $('.square').text(numero).addClass('yellow')
     }
     return classe;
 }
