@@ -16,7 +16,6 @@ $('.square').click(function() {
             var numero_ajax = data.response;
             console.log(numero_ajax);
             colori(numero_ajax);
-            $('.square').text(numero_ajax);
         },
         'error': function() {
             alert('si è verificato un errore');
